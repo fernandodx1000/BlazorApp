@@ -1,0 +1,57 @@
+﻿@page "/cccheker"
+
+<PageTitle>CC Checker v1</PageTitle>
+
+<div class=".panel-body"> 
+    <div class='alert alert-danger text-center info' style="display: none">  </div>       
+                 <div class="form-group"> 
+                         <textarea @bind="textcc" class="form-control" id="cc" name="cc" title="4552250055368xx3|08|2023|113" placeholder="4552250055368xx3|08|2023|113" required="required" ></textarea> 
+                         </div> 
+                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-md-offset-5"> 
+                                 <div class="form-group"> 
+                                     <button name="valid" class="btn btn-success" @onclick="Start" >Start</button> 
+                                 <button id="stop" class="btn btn-danger" >Stop</button> 
+                         </div> 
+                 </div> 
+</div>
+@foreach(var x in @CcList){
+  
+    <div>
+
+    <p>@x</p>
+</div>
+
+}
+
+@code {
+    
+    public  List<string> CcList = new List<string>{};
+
+
+    private string textcc { get; set; }
+    private int currentCount = 0;
+
+    private void IncrementCountog()
+    {
+        currentCount++;
+        CcList.Add($"lolo{currentCount}");
+    }
+
+    //starts the cc checker using string from textarea
+    private void Start()
+    {
+       gfc.CccheckerWK ccchecker = new gfc.CccheckerWK();
+     string[] textLines = textcc.Split(new[]{ Environment.NewLine }, StringSplitOptions.None);
+
+     
+
+      foreach(var ln in textLines){
+
+        CcList.Add($"{ln}" + Environment.NewLine );
+        
+      }
+    //ccchecker.Start(textcc);
+      
+       textcc = "";
+    }
+}
