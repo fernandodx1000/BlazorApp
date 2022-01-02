@@ -51,3 +51,4 @@ E:\Meu Software\_Repos\BlazorApp\BlazorApp\bin\Debug\net6.0\DataLibrary.pdb
 E:\Meu Software\_Repos\BlazorApp\BlazorApp\obj\Debug\net6.0\BlazorApp.csproj.CopyComplete
 E:\Meu Software\_Repos\BlazorApp\BlazorApp\bin\Debug\net6.0\Newtonsoft.Json.dll
 E:\Meu Software\_Repos\BlazorApp\BlazorApp\obj\Debug\net6.0\scopedcss\Shared\AmzLayout.razor.rz.scp.css
+E:\Meu Software\_Repos\BlazorApp\BlazorApp\bin\Debug\net6.0\Blazored.SessionStorage.dll

