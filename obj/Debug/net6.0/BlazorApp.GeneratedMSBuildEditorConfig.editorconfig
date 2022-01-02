@@ -19,8 +19,12 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Meu Software/_Repos/BlazorApp/BlazorApp/Pages/Ccchecker.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2NjaGVja2VyLnJhem9y
+[E:/Meu Software/_Repos/BlazorApp/BlazorApp/Pages/amz/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcYW16XEluZGV4LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Meu Software/_Repos/BlazorApp/BlazorApp/Pages/amz/Signin.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcYW16XFNpZ25pbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/Meu Software/_Repos/BlazorApp/BlazorApp/Pages/Counter.razor]
@@ -42,6 +46,14 @@ build_metadata.AdditionalFiles.CssScope =
 [E:/Meu Software/_Repos/BlazorApp/BlazorApp/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Meu Software/_Repos/BlazorApp/BlazorApp/Pages/Ccchecker.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2NjaGVja2VyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-lyf7qqpert
+
+[E:/Meu Software/_Repos/BlazorApp/BlazorApp/Shared/AmzLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFtekxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-2r68tb7z1r
 
 [E:/Meu Software/_Repos/BlazorApp/BlazorApp/Shared/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=

@@ -38,7 +38,7 @@ namespace BlazorApp.gfc
             throw new NotImplementedException();
         }
 
-        static public async Task<string> _func01(string cc, string mes, string ano, string cvv, string country, string state, string city, string zipcode)
+        public async Task<string> _func03(string cc, string mes, string ano, string cvv, string country, string state, string city, string zipcode)
         {
 
             //string URL = "https://secure2.convio.net/unfpa/site/Donation2";
@@ -68,7 +68,7 @@ namespace BlazorApp.gfc
             //HttpClient HC = new HttpClient(HttpCLientHandler);
             HttpClient HC = new HttpClient();
 
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
+          //  ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
             string number1 = cc.Substring(0, 4);
             string number2 = cc.Substring(4, 4);
             string number3 = cc.Substring(8, 4);
@@ -82,16 +82,35 @@ namespace BlazorApp.gfc
 
         }
 
-    static public async Task<string> _func02(HttpClient HC)
+        public async Task<string> _func01(HttpClient HC)
         {
             //  HttpClient HC = new HttpClient();
 
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
+          //  ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
             string Post = "JTdCJTIydjIlMjIlM0EyJTJDJTIyaWQlMjIlM0ElMjI4MDAyZjA0OTIyMTFlNDkyMjQ1ZTJkOWJiOGMyYTJmZSUyMiUyQyUyMnQlMjIlM0E4JTJDJTIydGFnJTIyJTNBJTIyNC41LjM1JTIyJTJDJTIyc3JjJTIyJTNBJTIyanMlMjIlMkMlMjJhJTIyJTNBJTdCJTIyYSUyMiUzQSU3QiUyMnYlMjIlM0ElMjJ0cnVlJTIyJTJDJTIydCUyMiUzQTAlN0QlMkMlMjJiJTIyJTNBJTdCJTIydiUyMiUzQSUyMmZhbHNlJTIyJTJDJTIydCUyMiUzQTAlN0QlMkMlMjJjJTIyJTNBJTdCJTIydiUyMiUzQSUyMnB0LUJSJTJDcHQlMkNlbi1VUyUyQ2VuJTIyJTJDJTIydCUyMiUzQTAlN0QlMkMlMjJkJTIyJTNBJTdCJTIydiUyMiUzQSUyMldpbjMyJTIyJTJDJTIydCUyMiUzQTAlN0QlMkMlMjJlJTIyJTNBJTdCJTIydiUyMiUzQSUyMiUyMiUyQyUyMnQlMjIlM0EwJTdEJTJDJTIyZiUyMiUzQSU3QiUyMnYlMjIlM0ElMjIxMzY2d183MjhoXzI0ZF8xciUyMiUyQyUyMnQlMjIlM0EwJTdEJTJDJTIyZyUyMiUzQSU3QiUyMnYlMjIlM0ElMjIxJTIyJTJDJTIydCUyMiUzQTAlN0QlMkMlMjJoJTIyJTNBJTdCJTIydiUyMiUzQSUyMmZhbHNlJTIyJTJDJTIydCUyMiUzQTAlN0QlMkMlMjJpJTIyJTNBJTdCJTIydiUyMiUzQSUyMnNlc3Npb25TdG9yYWdlLWVuYWJsZWQlMkMlMjBsb2NhbFN0b3JhZ2UtZW5hYmxlZCUyMiUyQyUyMnQlMjIlM0EwJTdEJTJDJTIyaiUyMiUzQSU3QiUyMnYlMjIlM0ElMjIwMTAwMTEwMTAxMTExMTExMTAxMDAxMTAxMTExMTExMTAxMTEwMDEwMTEwMTExMTEwMTExMTEwJTIyJTJDJTIydCUyMiUzQTglN0QlMkMlMjJrJTIyJTNBJTdCJTIydiUyMiUzQSUyMiUyMiUyQyUyMnQlMjIlM0EwJTdEJTJDJTIybCUyMiUzQSU3QiUyMnYlMjIlM0ElMjJNb3ppbGxhJTJGNS4wJTIwKFdpbmRvd3MlMjBOVCUyMDEwLjAlM0IlMjBXaW42NCUzQiUyMHg2NCUzQiUyMHJ2JTNBODkuMCklMjBHZWNrbyUyRjIwMTAwMTAxJTIwRmlyZWZveCUyRjg5LjAlMjIlMkMlMjJ0JTIyJTNBMCU3RCUyQyUyMm0lMjIlM0ElN0IlMjJ2JTIyJTNBJTIyJTIyJTJDJTIydCUyMiUzQTAlN0QlMkMlMjJuJTIyJTNBJTdCJTIydiUyMiUzQSUyMmZhbHNlJTIyJTJDJTIydCUyMiUzQTglN0QlMkMlMjJvJTIyJTNBJTdCJTIydiUyMiUzQSUyMmUxM2Q3NzVjNGIxNmRhN2ZiYjhmMzVkNmJhMWIyMWVmJTIyJTJDJTIydCUyMiUzQTclN0QlN0QlMkMlMjJiJTIyJTNBJTdCJTIyYSUyMiUzQSUyMiUyMiUyQyUyMmIlMjIlM0ElMjJodHRwcyUzQSUyRiUyRmNoZWNrb3V0LnN0cmlwZS5jb20lMkZVYTV1QWFqcjVERXE3dXBEMDFXR1ptNjNEbkNVUDdhdW41S016NFZDWmswJTJGUUZOSFUzWm8tQnozdHJkWmhRRTBUMXdvZVByLThET0EwXzJlT2Q1bDFqdyUyM3pRbmdGdGZwcXhwdXc5UkQwOXEtQTM4dUpvNGZfcHZhS3hNX1BacVdHcjAlMjIlMkMlMjJjJTIyJTNBJTIyU2h0MWc3YTBRYWxnWVJyajM1Z05rZmtXcWhfOERRSENWVW9zMDNxOUt0SSUyMiUyQyUyMmQlMjIlM0ElMjJmY2M4ZDMyNy0wMmQ1LTQ3YWUtODI0NS1hMDE4NTVjODFlNjIzYjlhYWIlMjIlMkMlMjJlJTIyJTNBJTIyM2FhMTVjYzgtMGQ0ZC00ZDMwLTg4MDQtZTY2NWYxZTcyYmIwMGJjOTM5JTIyJTJDJTIyZiUyMiUzQWZhbHNlJTJDJTIyZyUyMiUzQXRydWUlMkMlMjJoJTIyJTNBdHJ1ZSUyQyUyMmklMjIlM0ElNUIlMjJsb2NhdGlvbiUyMiU1RCUyQyUyMmolMjIlM0ElNUIlNUQlMkMlMjJuJTIyJTNBNjAlMkMlMjJ1JTIyJTNBJTIyY2hlY2tvdXQuc3RyaXBlLmNvbSUyMiU3RCUyQyUyMmglMjIlM0ElMjJkMTU1NmFlMTI3MTJkZDYxYmYzMCUyMiU3RA==";
             HC.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0");
             StringContent StringContent = new StringContent(Post, Encoding.UTF8, "text/plain");
             HttpResponseMessage result = await HC.PostAsync(new Uri("https://m.stripe.com/6"), StringContent);
             string final = await result.Content.ReadAsStringAsync();
+            return final;
+        }
+
+        public async Task<string> _func02(HttpClient HC, string cc, string mes, string ano, string cvv, string muid, string guid, string sid)
+        {
+
+           // string con = await consulta(cc.Substring(0, 6));
+           // Console.WriteLine(con);
+
+
+            //   HttpClient HC = new HttpClient();
+
+            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
+            string Post = $"type=card&card[number]={cc}&card[cvc]={cvv}&card[exp_month]={mes}&card[exp_year]={ano}&billing_details[name]=cona+larga&billing_details[email]=algumnacoissa%40gmail.com&billing_details[address][country]=PT&billing_details[address][line1]=lleos&billing_details[address][line2]=aki&billing_details[address][city]=cartaxo&billing_details[address][postal_code]=2070-26&guid={guid}&muid={muid}&sid={sid}&_stripe_account=acct_1CFMpBAasaqnO7tk&key=pk_live_a59hsiMEjnyHSbrVAHKexoYm&payment_user_agent=stripe.js%2Fa1e9df259%3B+stripe-js-v3%2Fa1e9df259%3B+checkout";
+            HC.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0");
+            StringContent StringContent = new StringContent(Post, Encoding.UTF8, "application/x-www-form-urlencoded");
+            HttpResponseMessage result = await HC.PostAsync(new Uri("https://api.stripe.com/v1/payment_methods"), StringContent);
+            string final = await result.Content.ReadAsStringAsync();
+            //Console.WriteLine($"type=card&card[number]={cc}&card[cvc]={cvv}&card[exp_month]={mes}&card[exp_year]={ano}&billing_details[name]=cona+larga&billing_details[email]=algumnacoissa%40gmail.com&billing_details[address][country]=PT&billing_details[address][line1]=lleos&billing_details[address][line2]=aki&billing_details[address][city]=cartaxo&billing_details[address][postal_code]=2070-26&guid={guid}&muid={muid}&sid={sid}&_stripe_account=acct_1CFMpBAasaqnO7tk&key=pk_live_a59hsiMEjnyHSbrVAHKexoYm&payment_user_agent=stripe.js%2Fa1e9df259%3B+stripe-js-v3%2Fa1e9df259%3B+checkout");
             return final;
         }
 

