@@ -1,0 +1,5 @@
+C:\Users\costa\source\repos\fernandodx1000\BlazorApp\obj\Release\net6.0\linux-arm\PubTmp\Out\appsettings.Development.json
+C:\Users\costa\source\repos\fernandodx1000\BlazorApp\obj\Release\net6.0\linux-arm\PubTmp\Out\appsettings.json
+C:\Users\costa\source\repos\fernandodx1000\BlazorApp\obj\Release\net6.0\linux-arm\PubTmp\Out\BlazorApp.pdb
+C:\Users\costa\source\repos\fernandodx1000\BlazorApp\obj\Release\net6.0\linux-arm\PubTmp\Out\DataLibrary.pdb
+C:\Users\costa\source\repos\fernandodx1000\BlazorApp\obj\Release\net6.0\linux-arm\PubTmp\Out\BlazorApp
